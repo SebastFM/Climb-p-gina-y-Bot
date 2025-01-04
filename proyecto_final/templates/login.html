@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Iniciar Sesión - Cambio Climático</title>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <h1 class="auth-title">Iniciar Sesión</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="auth-alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form action="{{ url_for('login') }}" method="POST" class="auth-form">
+            <input type="text" class="auth-input" name="username" placeholder="Nombre de usuario" required>
+            <input type="password" class="auth-input" name="password" placeholder="Contraseña" required>
+            <div class="button-container">
+                <button type="submit" class="btn">
+                    <strong>INICIAR SESIÓN</strong>
+                    <div id="container-stars">
+                        <div id="stars"></div>
+                    </div>
+                    <div id="glow">
+                        <div class="circle"></div>
+                        <div class="circle"></div>
+                    </div>
+                </button>
+            </div>
+        </form>
+        
+        <p class="auth-link">¿No tienes una cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+librerias:
+
+jinja2 = "*"
+flask-sqlalchemy = "*"
+flask = "*"
+sqlalchemy = "*"
+"discord.py" = "*"
+keras = "==2.15"
+requests = "*"
+tensorflow = "==2.15"
+pillow = "*"
+
+lenguajes:
+-python
+-html
+-css

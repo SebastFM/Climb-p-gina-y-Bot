@@ -1,0 +1,6 @@
+0 Huracanes
+1 Incendios Forestales
+2 Inundaciones
+3 Mega sequias
+4 Mega Tormentas
+5 Olas de Calor

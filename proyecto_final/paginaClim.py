@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '36222963'  
@@ -20,6 +22,12 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 @app.route('/')
 def index():
@@ -78,6 +86,30 @@ def login():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
+
+
+@app.route('/submit_comment', methods=['POST'])
+def submit_comment():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        content = request.form.get('text')
+        
+        if not email or not content:
+            flash('Por favor completa todos los campos')
+            return redirect(url_for('index', _anchor='feedback'))
+        
+        # Crear nuevo comentario
+        new_comment = Comment(email=email, content=content)
+        db.session.add(new_comment)
+        
+        try:
+            db.session.commit()
+            flash('¡Tu mensaje ha sido enviado exitosamente!')
+        except:
+            db.session.rollback()
+            flash('Hubo un error al enviar tu mensaje. Por favor intenta de nuevo.')
+        
+        return redirect(url_for('index', _anchor='feedback'))
 
 if __name__ == "__main__":
     with app.app_context():

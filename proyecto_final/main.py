@@ -362,4 +362,4 @@ async def desastres(ctx):
         await ctx.send("Ups, no has cargado ninguna imagen.")
 
 
-bot.run("Coloca tu token aqui")
+bot.run("pon tu token aca")

@@ -317,7 +317,8 @@
           <h1 class="home__title2">CUAL ES TU PLAN PARA ESTO?</h1>
         </div>
         <h2 class="about__title">COMENTANOS TU IDEA</h2>
-        <form action="" method="POST" class="feedback__form form">
+        
+        <form action="{{ url_for('submit_comment') }}" method="POST" class="feedback__form form">
           <label for="email">
             <input type="email" class="form__input" name="email" id="email" placeholder="Tu correo electrónico" required>
           </label>
@@ -325,12 +326,21 @@
             <textarea name="text" class="form__input" id="text" cols="70" rows="10" required placeholder="Comparte tus ideas para combatir el cambio climático"></textarea>
           </label>
           <div class="buttons">
-            <button class="btn" type="submit" ><span></span><p data-start="Comentanos" data-text="Comentanos" data-title="Unete al Cambio"></p></button>
-         </div>
+            <button class="btn" type="submit"><span></span><p data-start="Comentanos" data-text="Comentanos" data-title="Unete al Cambio"></p></button>
+          </div>
         </form>
+      
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
       </section>
-    </main>
-
+                
     <footer class="footer">
       <div class="title-container4">
         <img

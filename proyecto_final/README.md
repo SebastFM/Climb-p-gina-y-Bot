@@ -57,5 +57,4 @@ puedes preguntar de diferentes situaciones que han pasado en la actuialidad de e
 - publico odjetivo
 - debe ser apoyo al codigo
 - iniciar con la exposicion como un abre bocas (yo) o se puede alternar
-- 
-- 
+
